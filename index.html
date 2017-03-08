@@ -1,0 +1,69 @@
+<!DOCTYPE html>  
+<html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->  
+<head>  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>IOT CONTROL PANEL</title>
+</head>  
+<body>  
+  <script src="socket.io.js"></script>
+  <script src="angular.js"></script>  
+  <script src="socket.js"></script>
+  <script type="text/javascript">  
+    var app = angular.module('myApp', ['btford.socket-io']).
+    factory('mySocket', function (socketFactory) {
+        return socketFactory();
+    }).
+    controller('LED', function ($scope,mySocket) {
+ 
+        $scope.ledOn = function () {
+ 
+            mySocket.emit('led:on');
+            console.log('LED ON');
+        };
+        $scope.ledOff = function () {
+ 
+            mySocket.emit('led:off');
+            console.log('LED OFF');  
+        };    
+}); 
+</script>
+<script>
+    function show_alerton(){
+                alert("LED Connected");
+            }
+    function show_alertoff(){
+                alert("LED Disconnected");
+            }
+</script>
+  </div class="wrapper">
+  <header>
+    <h1>IOT CONTROL PANEL</h1>
+  </header>
+  <link rel="stylesheet" href="index.css" type="text/css"/>
+    <aside>
+            <h2 class="ControlPanel">Control Panel</h2>
+        <sub>
+            <h2 class="LED">LED Controller</h2>
+            <div ng-controller="LED">
+            <button class="LEDButton" ng-click="ledOn()" onclick="show_alerton()">On</button><button class="LEDButton" ng-click="ledOff()" onclick="show_alertoff()">Off</button>
+            </div>
+            <h2 class="Motion">Motion Controller</h2>
+            <div ng-controller="Motion">
+            <button class="MotionButton" ng-click="motionOn()">On</button><button class="MotionButton" ng-click="motionOff()">Off</button>
+            </div>
+            </div>
+            <h2 class="MotionDetected">Motion Detected</h2>
+            </div>
+            </div>
+            <h2 class="LongMotions">Long Motion</h2>
+            </div>
+            </div>
+            <h2 class="ShortMotions">Short Motion</h2>
+            </div>
+        </sub>
+    </aside>
+        <footer>
+            Copyright 2017
+        </footer>
+</body>
