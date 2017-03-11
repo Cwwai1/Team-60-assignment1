@@ -1,70 +1,67 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
+<html>  
 <head>
   <meta charset = "UTF-8">    
-  <link rel="stylesheet" type="text/css" href="index.css">
   <title>IOT CONTROL PANEL</title>
 </head>  
 <body>  
-  <!-- <script src="socket.io.js"></script> -->
-  <script src="/socket.io/socket.io.js"></script>  
-<script>
-    var socket = io();
-    function show_alerton(){
-		        socket.emit('led:on');
-		        console.log('LED ON');
-                alert("LED Connected");
-            }
-    function show_alertoff(){
-                socket.emit('led:off');
-                console.log('LED OFF');
-                alert("LED Disconnected");
-            }
-</script>
-<script>
-    function show_motionon(){
-                alert("Motion Sensor On")
-    }
-    function show_motionoff(){
-                alert("Motion Sensor Off")
-    }
-</script>
-  
-  <header>
-    <h1>IOT CONTROL PANEL</h1>
-  </header>
-  
-    <aside>
-            <h2 class="ControlPanel">Control Panel</h2>
-        <sub>
+    <!-- <script src="socket.io.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>  
+    <script>
+        var socket = io();
+        function ledon(){
+		    socket.emit('led:on');
+		    console.log('LED ON');
+            alert("LED Connected");
+        }
+        function ledoff(){
+            socket.emit('led:off');
+            console.log('LED OFF');
+            alert("LED Disconnected");
+        }
+    </script>
+    <script>
+        function motionon(){
+            socket.emit('sensor:on');
+            console.log('SENSOR ON');
+            alert("Motion Sensor On");
+        }
+        function motionoff(){
+            socket.emit('sensor:off');
+            console.log('SENSOR OFF');
+            alert("Motion Sensor Off")
+        }
+    </script>
 
-            <h2 class="LED">LED Controller</h2>
-            <div>
-            <button class="LEDButton" onclick="show_alerton()">On</button>
-            <button class="LEDButton" onclick="show_alertoff()">Off</button>
-            </div>
+    <header>
+        <h1  style="background-color: #1890E5; color: white; text-align: center; padding: 10px">IOT CONTROL PANEL</h1>
+    </header>
+    
+<aside style="text-align: center">
 
-            <h2 class="Motion">Motion Controller</h2>
-            <div ng-controller="Motion">
-            <button class="MotionButton" ng-click="motionOn()" onclick="show_motionon()">On</button>
-            <button class="MotionButton" ng-click="motionOff()" onclick="show_motionoff()">Off</button>
-            </div>
+    <h2 style="text-align: center; font-size: 200%">Control Panel</h2>
+    <div style="margin: auto; width: 30%; border: 3px solid black; padding: 30px">
+        <h4 style="font-size: 150%; position:relative; top:-50px">LED Controller</h4>
+        <button style="position:relative; top:-50px;padding: 5px 20px" onclick="ledon()">On</button>
+        <button style="position:relative; top:-50px;padding: 5px 20px" onclick="ledoff()">Off</button>
 
-            <div>
-            <h2 class="MotionDetected">Motion Detected</h2>
-            </div>
+        <h4 style="font-size: 150%; position:relative; top:-50px">Motion Controller</h4>
+    
+        <button style="position:relative; top:-50px;padding: 5px 20px" onclick="motionon()">On</button>
+        <button style="position:relative; top:-50px;padding: 5px 20px" onclick="motionoff()">Off</button>
+    
 
-            <div>
-            <h2 class="LongMotions">Long Motion</h2>
-            </div>
+        <h4 style="font-size: 150%; position:relative; top:-50px">Motion Detected</h4>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%">0</h5>
 
-            <div>
-            <h2 class="ShortMotions">Short Motion</h2>
-            </div>
+        <h4 style="font-size: 150%; position:relative; top:-50px">Long Motion</h4>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%">0</h5>
 
-        </sub>
-    </aside>
-        <footer>
-            Copyright 2017
-        </footer>
+        <h4 style="font-size: 150%; position:relative; top:-50px">Short Motion</h4>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%">0</h5>
+    </div>
+    
+</aside>
 </body>
+</html>
 
