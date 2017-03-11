@@ -10,18 +10,21 @@ app.get('/', function(req,res){
 		res.sendFile(__dirname + '/index.html');
 	});
 
-httpServer.listen(3001, function(){
+httpServer.listen(3000, function(){
 
-		console.log('listening on http://localhost:3001');
+		console.log('listening on http://localhost:3000');
 	});
 
 //Connect to arduino
 var board = new five.Board();
 var led;
+var motion;
 board.on('ready', function(){
-		
 		console.log('Arduino connected');
 		led = new five.Led(13);
+
+		motion = new five.Motion(2);
+
 	});
 
 
@@ -34,7 +37,24 @@ io.on('connection', function(socket){
 
 		socket.on('led:off', function(data){
 			led.off();
-			console.log('Led is off!')
+			console.log('Led is off!');
 		});
+
+		socket.on('sensor:on', function(data){
+			motion.on("motionstart", function() {
+    			console.log("Motion start");
+  			});
+
+			motion.on("motionend", function() {
+    			console.log("Motion end");
+  			});
+		});
+
+		socket.on('sensor:off', function(data){
+			console.log('NO MOTION')
+		});
+
 	});
+
+
 		
