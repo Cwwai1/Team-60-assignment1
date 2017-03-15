@@ -19,10 +19,6 @@ httpServer.listen(3000, function(){
 var board = new five.Board();
 var led;
 var motion;
-var time1;
-var time2;
-var diff;
-var total = 0;
 board.on('ready', function(){
 		console.log('Arduino connected');
 		led = new five.Led(13);
@@ -45,10 +41,16 @@ io.on('connection', function(socket){
 		});
 
 		socket.on('sensor:on', function(data){
+			var time1;
+			var time2;
+			var diff;
+			var total = 0;
+			var longmotion = 0;
+			var shortmotion = 0;
 			motion.on("motionstart", function() {
     			console.log("Motion start");
 				time1 = new Date().getTime();
-				total = total + 1;
+				total++;
   			});
 
 			motion.on("motionend", function() {
@@ -57,6 +59,14 @@ io.on('connection', function(socket){
 				diff = time2 - time1;
 				console.log(diff);
 				console.log(total);
+				socket.emit('total:motion', {motionno: total});
+				if (diff > 5000){
+					longmotion++;
+				} else{
+					shortmotion++;
+				};
+				socket.emit('long:motion', {motionlong: longmotion});
+				socket.emit('short:motion', {motionshort: shortmotion});
   			});
 		});
 
