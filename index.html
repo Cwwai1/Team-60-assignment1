@@ -19,8 +19,7 @@
             console.log('LED OFF');
             alert("LED Disconnected");
         }
-    </script>
-    <script>
+        
         function motionon(){
             socket.emit('sensor:on');
             console.log('SENSOR ON');
@@ -52,13 +51,13 @@
     
 
         <h4 style="font-size: 150%; position:relative; top:-50px">Motion Detected</h4>
-        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%">0</h5>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="total">0</h5>
 
         <h4 style="font-size: 150%; position:relative; top:-50px">Long Motion</h4>
-        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%">0</h5>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="long">0</h5>
 
         <h4 style="font-size: 150%; position:relative; top:-50px">Short Motion</h4>
-        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%">0</h5>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="short">0</h5>
     </div>
     
 </aside>
