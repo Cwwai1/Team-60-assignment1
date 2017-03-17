@@ -28,6 +28,7 @@ board.on('ready', function(){
 	});
 
 
+var bool = false;
 //socket connection handler
 io.on('connection', function(socket){
 		socket.on('led:on',  function(data){
@@ -47,31 +48,37 @@ io.on('connection', function(socket){
 			var total = 0;
 			var longmotion = 0;
 			var shortmotion = 0;
+			bool = true;
 			motion.on("motionstart", function() {
-    			console.log("Motion start");
-				time1 = new Date().getTime();
-				total++;
-  			});
+				console.log("Motion start");
+				if (bool === true){
+					time1 = new Date().getTime();
+					total++;
+				}
+			});
 
 			motion.on("motionend", function() {
-    			console.log("Motion end");
-				time2 = new Date().getTime();
-				diff = time2 - time1;
-				console.log(diff);
-				console.log(total);
-				socket.emit('total:motion', {motionno: total});
-				if (diff > 5000){
-					longmotion++;
-				} else{
-					shortmotion++;
-				};
-				socket.emit('long:motion', {motionlong: longmotion});
-				socket.emit('short:motion', {motionshort: shortmotion});
-  			});
+				console.log("Motion end");
+				if (bool === true){
+					time2 = new Date().getTime();
+					diff = time2 - time1;
+					console.log(diff);
+					console.log(total);
+					socket.emit('total:motion', {motionno: total});
+					if (diff > 5000){
+						longmotion++;
+					} else{
+						shortmotion++;
+					};
+					socket.emit('long:motion', {motionlong: longmotion});
+					socket.emit('short:motion', {motionshort: shortmotion});
+				}
+			});
 		});
 
 		socket.on('sensor:off', function(data){
-			console.log('NO MOTION')
+			bool = false;
+			console.log('Motion Off')
 		});
 
 	});
