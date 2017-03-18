@@ -27,8 +27,13 @@ board.on('ready', function(){
 
 	});
 
-
-var bool = false;
+var time1;
+var time2;
+var diff;
+var total = 0;
+var longmotion = 0;
+var shortmotion = 0;
+var bool;
 //socket connection handler
 io.on('connection', function(socket){
 		socket.on('led:on',  function(data){
@@ -41,25 +46,23 @@ io.on('connection', function(socket){
 			console.log('Led is off!');
 		});
 
+		socket.on('motion:bool', function(data){
+			bool = true;
+		});
+
 		socket.on('sensor:on', function(data){
-			var time1;
-			var time2;
-			var diff;
-			var total = 0;
-			var longmotion = 0;
-			var shortmotion = 0;
 			bool = true;
 			motion.on("motionstart", function() {
-				console.log("Motion start");
 				if (bool === true){
+					console.log("Motion start");
 					time1 = new Date().getTime();
 					total++;
 				}
 			});
 
 			motion.on("motionend", function() {
-				console.log("Motion end");
 				if (bool === true){
+					console.log("Motion end");
 					time2 = new Date().getTime();
 					diff = time2 - time1;
 					console.log(diff);
