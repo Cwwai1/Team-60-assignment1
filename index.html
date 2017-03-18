@@ -9,6 +9,7 @@
     <script src="/socket.io/socket.io.js"></script>  
     <script>
         var socket = io();
+        var open = 0;
         function ledon(){
 		    socket.emit('led:on');
 		    console.log('LED ON');
@@ -20,9 +21,14 @@
             alert("LED Disconnected");
         }
         function motionon(){
-            socket.emit('sensor:on');
-            console.log('SENSOR ON');
             alert("Motion Sensor On");
+            if (open === 0){
+                socket.emit('sensor:on');
+                open++;
+            }else{
+                socket.emit('motion:bool');
+            }
+            console.log('SENSOR ON');
             socket.on('total:motion', function(data){
                 var x = data.motionno;
                 var displaytotal = document.getElementById("total")
