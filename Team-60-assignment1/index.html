@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>  
+<head>
+  <meta charset = "UTF-8">    
+  <title>IOT CONTROL PANEL</title>
+</head>  
+<body>  
+    <!-- <script src="socket.io.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>  
+    <script>
+        var socket = io();
+        var open = 0;
+        function ledon(){//function to turn on led
+		    socket.emit('led:on');
+		    console.log('LED ON');
+            alert("LED Connected");
+        }
+        function ledoff(){//fucntion to turn off led
+            socket.emit('led:off');
+            console.log('LED OFF');
+            alert("LED Disconnected");
+        }
+        function motionon(){//function to turn on motion sensor
+            alert("Motion Sensor On");
+            if (open === 0){
+                socket.emit('sensor:on');
+                open++;
+            }else{
+                socket.emit('motion:bool');
+            }
+            console.log('SENSOR ON');
+            socket.on('total:motion', function(data){
+                var x = data.motionno;
+                var displaytotal = document.getElementById("total")
+                displaytotal.innerHTML = x;
+            });
+            socket.on('long:motion', function(data){
+                var y = data.motionlong;
+                var displaylong = document.getElementById("long")
+                displaylong.innerHTML = y;
+            });
+            socket.on('short:motion', function(data){
+                var z = data.motionshort;
+                var displayshort = document.getElementById("short")
+                displayshort.innerHTML = z;
+            });
+        }
+        function motionoff(){//function to turn off motion sensor
+            socket.emit('sensor:off');
+            console.log('SENSOR OFF');
+            alert("Motion Sensor Off")
+        }
+    </script>
+
+    <header>
+        <h1  style="background-color: #1890E5; color: white; text-align: center; padding: 10px">IOT CONTROL PANEL</h1>
+    </header>
+    
+<aside style="text-align: center">
+
+    <h2 style="text-align: center; font-size: 200%">Control Panel</h2>
+    <div style="margin: auto; width: 30%; border: 3px solid black; padding: 30px">
+        <h4 style="font-size: 150%; position:relative; top:-50px">LED Controller</h4>
+        <button style="position:relative; top:-50px;padding: 5px 20px" onclick="ledon()">On</button>
+        <button style="position:relative; top:-50px;padding: 5px 20px" onclick="ledoff()">Off</button>
+
+        <h4 style="font-size: 150%; position:relative; top:-50px">Motion Controller</h4>
+    
+        <button style="position:relative; top:-50px;padding: 5px 20px" onclick="motionon()">On</button>
+        <button style="position:relative; top:-50px;padding: 5px 20px" onclick="motionoff()">Off</button>
+    
+
+        <h4 style="font-size: 150%; position:relative; top:-50px">Motion Detected</h4>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="total"></h5>
+
+        <h4 style="font-size: 150%; position:relative; top:-50px">Long Motion</h4>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="long"></h5>
+
+        <h4 style="font-size: 150%; position:relative; top:-50px">Short Motion</h4>
+        <h5 style="text-align: center; position: relative; top: -50px; font-size: 100%" id="short"></h5>
+    </div>
+    
+</aside>
+</body>
+</html>
+
