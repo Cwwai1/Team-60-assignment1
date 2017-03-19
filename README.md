@@ -1,5 +1,5 @@
 Team 60 -Assignment1
-Name: Chuen Wern Wai (26077086), Kin Seng Chan (25656716)
+Name: Chuen Wern Wai (26077086), Kin Seng Chan (25656716).
 
 This assignment consist of Motion folder for Task 1.
 server.js file and index.html for Task 2.
@@ -13,24 +13,24 @@ Packages are used for Task 2 Assignment 1, which are:
 
 
 Hardware that are used for this assignment:
-	Arduino board
-	LED light
-	Motion sensor
-	an USB cable to connect Arduino board to the machine(desktop / laptop)
-	Few wires to connect the motion sensor and LED light to the Arduino board
+	Arduino board.
+	LED light.
+	Motion sensor.
+	an USB cable to connect Arduino board to the machine(desktop / laptop).
+	Few wires to connect the motion sensor and LED light to the Arduino board.
 
 
 To setup the Arduino board for Task 2:
 	To connect the LED:
-		Plug in the positive side of the LED to the Port 13
-		Plug in the negative side of the LED to the GND
+		Plug in the positive side of the LED to the Port 13.
+		Plug in the negative side of the LED to the GND.
 
 	To connect the motion sensor:
-		Plug in Out to Port 2
-		Plug in VCC to 5V
-		Plug in GND of PIR to GND of Arduino board
+		Plug in Out to Port 2.
+		Plug in VCC to 5V.
+		Plug in GND of PIR to GND of Arduino board.
 
-	Lastly, plug in Arduino board to machine (desktop / laptop)
+	Lastly, plug in Arduino board to machine (desktop / laptop).
 
 
 In order for task 2 to work properly, Node.js, Johnny five and socket.io are required to be installed. Open the LXTerminal and write the lines given below:
@@ -49,8 +49,8 @@ To run Task2:
 	7. Go to browser, open http://localhost:3000/.
 
 Last but not least, user are able to perform actions from the client side which are:
-	Switching the LED on and off
-	Switching the motion sensor on and off
-	Display total number of motion detected from the motion sensor
-	Display total number of long and short motion detected from the motion sensor
+	Switching the LED on and off.
+	Switching the motion sensor on and off.
+	Display total number of motion detected from the motion sensor.
+	Display total number of long and short motion detected from the motion sensor.
 
